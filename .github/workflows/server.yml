@@ -22,14 +22,11 @@ jobs:
         run: |
           curl -SsL -o playit https://github.com/playit-cloud/playit-agent/releases/latest/download/playit-linux-amd64
           chmod +x playit
-
-          if [ -n "$PLAYIT_SECRET" ]; then
-            echo "Iniciando Playit com Secret Key..."
-            ./playit --secret "$PLAYIT_SECRET" &
-          else
-            echo "AVISO: PLAYIT_SECRET nao configurada. Gerando link no console..."
-            ./playit &
-          fi
+          sudo mv playit /usr/local/bin/playit
+            
+          playit --claim &
+        
+          sleep 10
 
       - name: Executar Servidor
         run: |
