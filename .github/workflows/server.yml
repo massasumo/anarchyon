@@ -20,17 +20,15 @@ jobs:
         env:
           PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET_KEY }}
         run: |
-          curl -SsL https://playit-cloud.github.io/ppa/key.gpg | sudo apt-key add -
-          sudo curl -SsL -o /etc/apt/sources.list.d/playit-cloud.list https://playit-cloud.github.io/ppa/playit-cloud.list
-          sudo apt-get update
-          sudo apt-get install playit -y
+          curl -SsL -o playit https://github.com/playit-cloud/playit-agent/releases/latest/download/playit-linux-amd64
+          chmod +x playit
 
           if [ -n "$PLAYIT_SECRET" ]; then
             echo "Iniciando Playit com Secret Key..."
-            playit --secret "$PLAYIT_SECRET" &
+            ./playit --secret "$PLAYIT_SECRET" &
           else
-            echo "AVISO: PLAYIT_SECRET_KEY nao configurada. O Playit gerara um link no console."
-            playit &
+            echo "AVISO: PLAYIT_SECRET nao configurada. Gerando link no console..."
+            ./playit &
           fi
 
       - name: Executar Servidor
