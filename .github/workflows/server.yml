@@ -27,10 +27,10 @@ jobs:
 
           if [ -n "$PLAYIT_SECRET" ]; then
             echo "Iniciando Playit com Secret Key..."
-            playit --secret "$PLAYIT_SECRET" daemon &
+            playit agent --secret "$PLAYIT_SECRET" &
           else
-            echo "AVISO: PLAYIT_SECRET_KEY não configurada. O Playit gerara um link de reivindicacao no console."
-            playit daemon &
+            echo "AVISO: PLAYIT_SECRET_KEY nao configurada. O Playit gerara um link no console."
+            playit agent &
           fi
 
       - name: Executar Servidor
