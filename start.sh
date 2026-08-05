@@ -13,19 +13,22 @@ curl -fL -o mods/architectury.jar "https://cdn.modrinth.com/data/lhA11yRo/versio
 # FTB Library 2001.2.5
 curl -fL -o mods/ftblibrary.jar "https://cdn.modrinth.com/data/S33A8Iic/versions/3W3OQk1F/ftblibrary-fabric-2001.2.5.jar"
 
-# PacketEvents (Necessario para o GrimAC)
+# PacketEvents 2.7.0
 curl -fL -o mods/packetevents.jar "https://cdn.modrinth.com/data/2XpI1320/versions/L854fM2X/packetevents-fabric-2.7.0.jar"
 
-# CristelLib (Necessario para Towns and Towers)
+# CristelLib 1.1.5
 curl -fL -o mods/cristellib.jar "https://cdn.modrinth.com/data/01T9S16W/versions/Jb1vXo2V/cristellib-fabric-1.1.5.jar"
 
 # Cobblemon 1.5.2
 curl -fL -o mods/Cobblemon-fabric-1.5.2.jar "https://cdn.modrinth.com/data/1K3C899a/versions/9S7kQJvX/Cobblemon-fabric-1.5.2%2B1.20.1.jar"
 
+# Geyser-Fabric (1.20.1)
+curl -fL -o mods/geyser-fabric.jar "https://cdn.modrinth.com/data/1e24E1A6/versions/v2.2.0-SNAPSHOT/Geyser-Fabric-2.2.0-SNAPSHOT.jar"
+
 echo "Aceitando EULA..."
 echo "eula=true" > eula.txt
 
-echo "Baixando Fabric Server Installer atualizado (Loader 0.16.10)..."
+echo "Baixando Fabric Server Installer (Loader 0.16.10)..."
 curl -fL -o fabric-server-launch.jar "https://meta.fabricmc.net/v2/versions/loader/1.20.1/0.16.10/1.0.1/server/jar"
 
 echo "Iniciando Servidor Minecraft..."
