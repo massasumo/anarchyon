@@ -12,9 +12,9 @@ echo "eula=true" > eula.txt
 echo "=== Instalando o Servidor Fabric ==="
 java -jar fabric-installer-1.1.2.jar server -mcversion 1.20.1 -loader 0.16.10 -downloadMinecraft
 
-echo "=== Gerando Link do Playit ==="
-sudo playit secret &
-sleep 3
+echo "=== Iniciando Túnel Playit ==="
+sudo playit start &
+sleep 5
 
 echo "=== Iniciando o Servidor ==="
 java -Xmx4G -jar fabric-server-launch.jar nogui
