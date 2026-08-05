@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 mkdir -p mods
@@ -8,8 +9,12 @@ curl -fSL -o mods/Cobblemon-fabric-1.5.2.jar "https://cdn.modrinth.com/data/MdwF
 echo "=== Aceitando EULA ==="
 echo "eula=true" > eula.txt
 
-echo "=== Instalando o Servidor Fabric e baixando o Minecraft Server JAR ==="
+echo "=== Instalando o Servidor Fabric ==="
 java -jar fabric-installer-1.1.2.jar server -mcversion 1.20.1 -loader 0.16.10 -downloadMinecraft
+
+echo "=== Gerando Link do Playit ==="
+sudo playit secret &
+sleep 3
 
 echo "=== Iniciando o Servidor ==="
 java -Xmx4G -jar fabric-server-launch.jar nogui
