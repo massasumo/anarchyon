@@ -24,7 +24,12 @@ jobs:
           chmod +x playit
           sudo mv playit /usr/local/bin/playit
             
-          playit --claim &
+          # Executa o playit corretamente
+          if [ -n "$PLAYIT_SECRET" ]; then
+            playit --secret "$PLAYIT_SECRET" &
+          else
+            playit &
+          fi
         
           sleep 10
 
