@@ -16,10 +16,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Iniciar Tunel Pinggy (Sem cadastro)
+      - name: Iniciar Tunel Pinggy (TCP)
         run: |
-          ssh -o StrictHostKeyChecking=no -p 443 -R0:localhost:25565 qr@a.pinggy.io &
+          ssh -o StrictHostKeyChecking=no -p 443 -R0:localhost:25565 tcp@a.pinggy.io > pinggy.log 2>&1 &
           sleep 5
+          cat pinggy.log
 
       - name: Executar Servidor
         run: |
