@@ -16,22 +16,23 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Instalar e Iniciar Playit.gg
+      - name: Instalar e Iniciar Ngrok
         env:
-          PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET_KEY }}
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
         run: |
-          curl -SsL -o playit https://github.com/playit-cloud/playit-agent/releases/latest/download/playit-linux-amd64
-          chmod +x playit
-          sudo mv playit /usr/local/bin/playit
-            
-          # Executa o playit corretamente
-          if [ -n "$PLAYIT_SECRET" ]; then
-            playit --secret "$PLAYIT_SECRET" &
-          else
-            playit &
-          fi
-        
-          sleep 10
+          # Download e instalacao do Ngrok
+          curl -s https://bin.equinox.io/c/bNyA16AP2xn/ngrok-v3-stable-linux-amd64.tgz | tar -xz
+          sudo mv ngrok /usr/local/bin/
+          
+          # Autenticacao
+          ngrok config add-authtoken $NGROK_AUTH_TOKEN
+          
+          # Inicia o tunel TCP para a porta padrao do Minecraft
+          ngrok tcp 25565 &
+          sleep 5
+          
+          # Exibe o IP/Porta diretamente no log para voce copiar
+          curl -s http://localhost:4040/api/tunnels | grep -o 'tcp://[^\"]*' || echo "Aguardando Ngrok iniciar..."
 
       - name: Executar Servidor
         run: |
