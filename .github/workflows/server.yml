@@ -20,18 +20,17 @@ jobs:
         env:
           NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
         run: |
-          # Download e instalacao do Ngrok
-          curl -s https://bin.equinox.io/c/bNyA16AP2xn/ngrok-v3-stable-linux-amd64.tgz | tar -xz
-          sudo mv ngrok /usr/local/bin/
+          # Adiciona o repositorio oficial do Ngrok e instala
+          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
+          echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list
+          sudo apt update && sudo apt install ngrok -y
           
-          # Autenticacao
+          # Autentica e inicia o tunel
           ngrok config add-authtoken $NGROK_AUTH_TOKEN
-          
-          # Inicia o tunel TCP para a porta padrao do Minecraft
           ngrok tcp 25565 &
           sleep 5
           
-          # Exibe o IP/Porta diretamente no log para voce copiar
+          # Exibe o IP/Porta no log
           curl -s http://localhost:4040/api/tunnels | grep -o 'tcp://[^\"]*' || echo "Aguardando Ngrok iniciar..."
 
       - name: Executar Servidor
